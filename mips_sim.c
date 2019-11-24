@@ -53,6 +53,10 @@ unsigned char rs;
 unsigned char rt;
 unsigned char rd;
 
+unsigned char set_readReg1();
+unsigned char set_readReg2();
+unsigned char set_writeReg();
+
 //misc. function
 int init(char *filename);
 void print_cycles();
@@ -67,9 +71,6 @@ void update_pc();
 void HexToBin();
 void isOpcode();
 void set_aluControl();
-unsigned char set_readReg1();
-unsigned char set_readReg2();
-unsigned char set_writeReg();
 void set_funct();
 void set_offset();
 void sign_extension();
@@ -334,7 +335,7 @@ void fetch()
 			aluOp[0] = 0;
 		}
 		else if (op == 3)
-		{				   // jal instruction
+		{	// jal instruction
 			regDst[1] = 1; // $ra
 			regDst[0] = 0;
 			jump = 1;
