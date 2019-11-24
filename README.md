@@ -18,7 +18,7 @@ addi $s1, $zero, 20
 add $s2, $s0, $s1
 addi $t1, $zero, 10
 ```
-add_test.hex is the presentation of assambly code by hexadecimal according to add_test.asm
+***add_test.hex*** is the presentation of assambly code by **hexadecimal** according to ***add_test.asm***.
 ```
 $ cat add_test.hex
 2010000a
@@ -26,7 +26,7 @@ $ cat add_test.hex
 02119020
 2009000a
 ```
-execute the mips_sim for add_test.hex in run mode
+**Execute** the mips_sim for ***add_test.hex*** in **run mode**.
 ```
 $ ./mips_sim add_hex 1
 
@@ -97,7 +97,7 @@ $ cat runme.asm
   exit:
         addi $t1, $zero, 10  #exit simulation if $t1=10
 ```
-runme.hex is the presentation of assambly code by hexadecimal according to runme.asm
+***runme.hex*** is the presentation of assambly code by **hexadecimal** according to ***runme.asm***.
 ```
 $ runme.hex
 
@@ -122,7 +122,7 @@ afa40000
 03e00008
 2009000a
 ```
-execute the mips_sim for runme.hex in run mode
+**Execute** the mips_sim for ***runme.hex*** in **run mode**.
 ```
 $ ./mips_sim runme.hex 1
 
