@@ -2,13 +2,11 @@
 #### The goal of this project is to write a simulator program that simulates the MIPS microarchitecture (single cycle execution). This simulator should compile and run bellow instructions: add, addi, jal, j, jr, lw, sw, slti, beq
 ---
 ## Usage
-####$ gcc mips_sim.c -o mips_sim
-
-
-####$ ./mips_sim ./runme.hex 0 		// debug mode
-
-
-####$ ./mips_sim ./runme.hex 1 		// run mode
+```c
+$ gcc mips_sim.c -o mips_sim
+$ ./mips_sim ./runme.hex 0 		// debug mode
+$ ./mips_sim ./runme.hex 1 		// run mode
+```
 ---
 ## Attribute
 ### Control attribute
