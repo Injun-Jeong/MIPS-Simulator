@@ -22,7 +22,7 @@ unsigned char aluSrc;
 unsigned char regWrite;
 ```
 1. ***regDst*** indicates that **this instruction uses rd-register or not**.
-'''
+```
 /* This instruction is ***jal instruction*** and uses rd-register for $ra register. */
 regDst[1] = 1;
 regDst[0] = 0;
@@ -34,6 +34,6 @@ regDst[0] = 1;
 /* This instruction is I-format instruction or j instruction */
 regDst[1] = 0;
 regDst[0] = 0;
-'''
+```
 2. ***jump*** indicates that **this instruction is J-instruction or not**.
 3. branch indicates that 
