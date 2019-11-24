@@ -18,7 +18,7 @@ addi $s1, $zero, 20
 add $s2, $s0, $s1
 addi $t1, $zero, 10
 ```
-***add_test.hex*** is the representation of assambly code by **hexadecimal** according to ***add_test.asm***.
+***add_test.hex*** is the representation of assembly code by **hexadecimal** according to ***add_test.asm***.
 ```
 $ cat add_test.hex
 2010000a
@@ -97,7 +97,7 @@ $ cat runme.asm
   exit:
         addi $t1, $zero, 10  #exit simulation if $t1=10
 ```
-***runme.hex*** is the representation of assambly code by **hexadecimal** according to ***runme.asm***.
+***runme.hex*** is the representation of assembly code by **hexadecimal** according to ***runme.asm***.
 ```
 $ runme.hex
 
