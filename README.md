@@ -8,8 +8,8 @@ $ ./mips_sim ./runme.hex 0 		// debug mode
 $ ./mips_sim ./runme.hex 1 		// run mode
 ```
 ---
-## Attribute
-### Control attribute
+## Code
+### Attribute
 ```c
 unsigned char regDst[2];
 unsigned char jump;
@@ -31,7 +31,10 @@ regDst[0] = 0;
 regDst[1] = 0;
 regDst[0] = 1;
 
-/* This instruction is I-format instruction or j instruction, so this instruction does not use the rd-register. */
+/*
+* This instruction is I-format instruction or j instruction.
+* So this instruction does not use the rd-register.
+*/
 regDst[1] = 0;
 regDst[0] = 0;
 ```
