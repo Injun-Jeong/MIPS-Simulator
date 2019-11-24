@@ -9,8 +9,7 @@ $ ./mips_sim ./runme.hex 1 		// run mode
 ```
 ---
 ## Example
-1. add instruction
-add_test.asm
+1. add_test.asm
 ```
 $ cat add_test.asm
 
@@ -68,8 +67,7 @@ R30  [fp] = 0
 R31  [ra] = 0
 ```
 
-2. some instruction
-runme.asm
+2. runme.asm
 ```
 $ cat runme.asm
 
