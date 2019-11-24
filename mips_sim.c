@@ -53,10 +53,6 @@ unsigned char rs;
 unsigned char rt;
 unsigned char rd;
 
-unsigned char set_readReg1();
-unsigned char set_readReg2();
-unsigned char set_writeReg();
-
 //misc. function
 int init(char *filename);
 void print_cycles();
@@ -71,6 +67,9 @@ void update_pc();
 void HexToBin();
 void isOpcode();
 void set_aluControl();
+unsigned char set_readReg1();
+unsigned char set_readReg2();
+unsigned char set_writeReg();
 void set_funct();
 void set_offset();
 void sign_extension();
@@ -335,7 +334,7 @@ void fetch()
 			aluOp[0] = 0;
 		}
 		else if (op == 3)
-		{	// jal instruction
+		{				   // jal instruction
 			regDst[1] = 1; // $ra
 			regDst[0] = 0;
 			jump = 1;
@@ -413,7 +412,7 @@ void exe()
 	zero = 0;
 	
 	/* omit the ALU control of jr instuction */
-	if (aluOp[1] = 1 && aluOp[0] == 0 && funct == 8) {;}
+	if (inst_format == 'r' && funct == 8) {;}
 	
 	/* omit the ALU control of and */
 	else if (aluControl == 0) {;}
@@ -452,7 +451,7 @@ void exe()
 void mem()
 {
 	/* jr instruction does noting */
-	if (aluOp[1] = 1 && aluOp[0] == 0 && funct == 8) {;}
+	if (inst_format == 'r' && funct == 8) {;}
 	else if (memWrite == 1) // sw instruction
 		data_mem[aluResult] = regs[rd];
 	else if (memRead == 1) // lw instruction
@@ -462,7 +461,7 @@ void mem()
 void wb()
 {
 	/* jr instruction does noting */
-	if (aluOp[1] = 1 && aluOp[0] == 0 && funct == 8) {;}
+	if (inst_format == 'r' && funct == 8) {;}
 	else if (memToReg[1] == 1) // jal
 		regs[31] = pc + 4;
 	else
@@ -478,7 +477,7 @@ void wb()
 
 void update_pc()
 {
-	if (aluOp[1] = 1 && aluOp[0] == 0 && funct == 8) // jr instruction
+	if (inst_format == 'r' && funct == 8) // jr instruction
 		pc = regs[31];
 	else if (jump == 1)
 	{

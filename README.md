@@ -8,6 +8,163 @@ $ ./mips_sim ./runme.hex 0 		// debug mode
 $ ./mips_sim ./runme.hex 1 		// run mode
 ```
 ---
+## Example
+1. add instruction
+add_test.asm
+```
+$ cat add_test.asm
+
+addi $s0, $zero, 10
+addi $s1, $zero, 20
+add $s2, $s0, $s1
+addi $t1, $zero, 10
+```
+add_test.hex is the presentation of assambly code by hexadecimal according to add_test.asm
+```
+$ cat add_test.hex
+2010000a
+20110014
+02119020
+2009000a
+```
+execute the mips_sim for add_test.hex in run mode
+```
+$ ./mips_sim add_hex 1
+
+Clock cycles = 4
+PC	   = 16
+
+R0   [r0] = 0
+R1   [at] = 0
+R2   [v0] = 0
+R3   [v1] = 0
+R4   [a0] = 0
+R5   [a1] = 0
+R6   [a2] = 0
+R7   [a3] = 0
+R8   [t0] = 0
+R9   [t1] = 10
+R10  [t2] = 0
+R11  [t3] = 0
+R12  [t4] = 0
+R13  [t5] = 0
+R14  [t6] = 0
+R15  [t7] = 0
+R16  [s0] = 10
+R17  [s1] = 20
+R18  [s2] = 30
+R19  [s3] = 0
+R20  [s4] = 0
+R21  [s5] = 0
+R22  [s6] = 0
+R23  [s7] = 0
+R24  [t8] = 0
+R25  [t9] = 0
+R26  [k0] = 0
+R27  [k1] = 0
+R28  [gp] = 0
+R29  [sp] = 0
+R30  [fp] = 0
+R31  [ra] = 0
+```
+
+2. some instruction
+runme.asm
+```
+$ cat runme.asm
+
+  main:
+        addi $sp, $zero, 32764
+        addi $a0, $zero, 10
+        jal accm
+        j   exit
+  accm:
+        addi  $sp, $sp, -8
+        sw    $ra, 4($sp)  # save the return address
+        sw    $a0, 0($sp)
+        slti  $t0,$a0,1     # test for n < 1
+        beq   $t0,$zero,L1  # if n >= 1, go to L1
+        addi  $v0,$zero,0 # return 0
+        addi  $sp,$sp,8   # pop 2 items off stack
+        jr    $ra         # return to caller
+  L1:
+        addi $a0,$a0,-1
+        jal accm         # call fact with (n –1)
+        lw $a0, 0($sp) # return from jal: restore argument n lw $ra, 4($sp) # restore the return address
+        lw $ra, 4($sp) # restore the return address
+        addi $sp, $sp, 8 # adjust stack pointer to pop 2 items
+        add $v0, $a0, $v0
+        jr   $ra           # return to the caller
+ 
+  exit:
+        addi $t1, $zero, 10  #exit simulation if $t1=10
+```
+runme.hex is the presentation of assambly code by hexadecimal according to runme.asm
+```
+$ runme.hex
+
+201d7ffc
+2004000a
+0c000004
+08000013
+23bdfff8
+afbf0004
+afa40000
+28880001
+11000003
+20020000
+23bd0008
+03e00008
+2084ffff
+0c000004
+8fa40000
+8fbf0004
+23bd0008
+00821020
+03e00008
+2009000a
+```
+execute the mips_sim for runme.hex in run mode
+```
+$ ./mips_sim runme.hex 1
+
+Clock cycles = 133
+PC	   = 80
+
+R0   [r0] = 0
+R1   [at] = 0
+R2   [v0] = 55
+R3   [v1] = 0
+R4   [a0] = 10
+R5   [a1] = 0
+R6   [a2] = 0
+R7   [a3] = 0
+R8   [t0] = 1
+R9   [t1] = 10
+R10  [t2] = 0
+R11  [t3] = 0
+R12  [t4] = 0
+R13  [t5] = 0
+R14  [t6] = 0
+R15  [t7] = 0
+R16  [s0] = 0
+R17  [s1] = 0
+R18  [s2] = 0
+R19  [s3] = 0
+R20  [s4] = 0
+R21  [s5] = 0
+R22  [s6] = 0
+R23  [s7] = 0
+R24  [t8] = 0
+R25  [t9] = 0
+R26  [k0] = 0
+R27  [k1] = 0
+R28  [gp] = 0
+R29  [sp] = 32764
+R30  [fp] = 0
+R31  [ra] = 12
+```
+---
 ## Code
 ### Attribute
 ```c
@@ -99,7 +256,7 @@ void fetch(){
 	}
 }
 
-void isOpcode(){
+void isOpcode() {
 	/* MSB 6-digits */
 	op = 0;
 	op += inst[31] << 5;
@@ -120,31 +277,25 @@ void isOpcode(){
 2. decode(): Instruction decode & register read
 ```c
 void decode() {
-	if (inst_format == 'j')
-	{
+	if (inst_format == 'j') {
 		set_offset();
 		if (regDst[1] == 1)
 			rd = 31;
 	}
-	else
-	{
-		if (regDst[0] == 0)
-		{ // I-format instruction
+	else {
+		if (regDst[0] == 0) { // I-format instruction
 			rs = set_readReg1();
 			rt = set_readReg2();
 			set_offset();
 		}
-		else
-		{ // R-format instruction
+		else { // R-format instruction
 			set_funct();
-			if (funct == 8)
-			{ // jr instruction
+			if (funct == 8) { // jr instruction
 				rs = 31;
 				rt = 0;
 				rd = 0;
 			}
-			else
-			{
+			else {
 				rs = set_readReg1();
 				rt = set_readReg2();
 				rd = set_writeReg();
