@@ -1,5 +1,5 @@
 # Project 2: MIPS Simulator
-The goal of this project is to write a simulator program that simulates the MIPS microarchitecture (single cycle execution). This simulator should compile and run bellow instructions: add, addi, jal, j, jr, lw, sw, slti, beq
+#### The goal of this project is to write a simulator program that simulates the MIPS microarchitecture (single cycle execution). This simulator should compile and run bellow instructions: add, addi, jal, j, jr, lw, sw, slti, beq
 ---
 ## Usage
 \
@@ -10,7 +10,8 @@ $ ./mips_sim ./runme.hex 1 		// run mode
 ---
 ## Attribute
 ### Control attribute
-'''c
+'''
+c
 unsigned char regDst[2];
 unsigned char jump;
 unsigned char branch;
