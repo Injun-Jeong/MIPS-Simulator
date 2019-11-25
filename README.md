@@ -2,9 +2,10 @@
 #### The goal of this project is to write a simulator program that simulates the MIPS microarchitecture (single cycle execution). This simulator should compile and run bellow instructions: add, addi, jal, j, jr, lw, sw, slti, beq
 
 
-### The Full Datapath of MIPS for Single Cycle Execution
-
 <center><img src="./img/mips_single_cycle.jpeg" width=70% height=70%></center>
+
+
+###### The Full Datapath of MIPS for Single Cycle Execution
 
 ---
 ## Usage
