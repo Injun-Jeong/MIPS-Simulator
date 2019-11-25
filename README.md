@@ -1,6 +1,11 @@
 # Project 2: MIPS Simulator
 #### The goal of this project is to write a simulator program that simulates the MIPS microarchitecture (single cycle execution). This simulator should compile and run bellow instructions: add, addi, jal, j, jr, lw, sw, slti, beq
 ---
+## The Full Datapath of MIPS for Single Cycle Execution
+
+![mips_single_cycle](./img/mips_single_cycle.jpeg)
+
+---
 ## Usage
 ```
 $ gcc mips_sim.c -o mips_sim
