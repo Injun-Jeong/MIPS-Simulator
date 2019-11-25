@@ -4,7 +4,7 @@
 
 ### The Full Datapath of MIPS for Single Cycle Execution
 
-![mips_single_cycle](./img/mips_single_cycle.jpeg){: width="300" height="300"}
+<center><img src="./img/mips_single_cycle.jpeg" width="300" height="300"></center>
 
 ---
 ## Usage
