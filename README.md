@@ -5,8 +5,6 @@
 <center><img src="./img/mips_single_cycle.jpeg" width=70% height=70%></center>
 
 
-###### 			The Full Datapath of MIPS for Single Cycle Execution
-
 ---
 ## Usage
 ```
